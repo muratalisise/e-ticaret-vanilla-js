@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+* {
+  font-family: "Montserrat", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --black: #1c2a39;
+  --gray: #5c6a79;
+  --purple: #4c3db2;
+}
+
+.navbar{
+  height: 120px;
+  width: 80%;
+  margin-left: 10%;
+}
+.title{
+  font-weight: bold;
+}
+.menu, 
+.menu_icons{
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  color: var(--gray);
+  cursor: pointer;
+}
+
+.menu .active{
+  color: var(--black);
+  font-weight: bold;
+}
+
+.menu li, .menu_icons li {
+  margin: 0 10px;
+
+}
+.menu_icons li {
+  color: var(--black);
+}
+
+.basket_icon{
+ position: relative;
+}
+
+.basket_count{
+ position: absolute;
+  right: -0.7rem;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  background-color: var(--black);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.slider{
+  width: 80%;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slider img {
+  height: 600px;
+}
+.store{
+  width: 80%;
+  margin-left: 10%;
+}
+
+.book_card{
+  height: 400px;
+  display: flex;
+  align-content: center;
+}
+
+.fos{
+  font-family: open sans-serif
+}
+.gray{
+  color: var(--gray);
+}
+.black{
+  color: var(--black);
+}
+
+.fw-bold{
+  font-weight: bold;
+}
+
+.book_star_rate .bi-star, .bi_star_fill{
+  color: white ;
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+
+.book_star_rate .bi_star_fill.active{
+  color: yellow;
+}
+
+.book_reviews{
+  color: gray;
+}
+.old_price{
+  text-decoration: line-through;
+  color: rgb(196, 194, 194);
+}
+.book-description{
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-line-clamp: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filter-background{
+  position: absolute;
+  left: 0;
+  width: 600px;
+  height: 900px;
+  background-color: rgb(177, 168, 168);
+  z-index: -1;
+}
+
+.filter{
+  position: absolute;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  min-height: 650px;
+  justify-content: center;
+  text-align: center;
+}
+
+.filter li {
+  width: 100%;
+  color: var(--gray);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.filter li:hover{
+  transition: 1s all linear;
+  color: var(--purple);
+}
+
+.filter li.active{
+  color: var(--purple);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.filter li.active::before{
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--purple);
+  position: absolute;
+    left: 158px;
+  margin-top: 12px;
+}
+
+.bakset_modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.514);
+  width: 100%;
+  height: 100%;
+}
+
+.basket_items{
+  position: relative;
+  width: 450px;
+  background-color: white;
+  height: 100%;
+  float: right;
+}
+
+.basket_items .bi-x{
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 3rem;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.basket-title{
+    color: black;
+    margin-top: 5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.basket_list{
+  list-style-type: none;
+  padding: 0 5px;
+  margin-top: 3rem;
+  max-height: 650px;
+  overflow-y: auto;
+}
+
+.basket_item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.basket_item-info{
+  width: 250px;
+}
+.basket_item-info .book_name{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.basket_item-info .book_price{
+  font-size: 16px;
+}
+
+.basket_item .book-count{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--black);
+}
+.book_count .increase{
+  margin-right: 5px;
+}
+.book_count .decrease{
+  margin-right: 5px;
+}
+.book_count .increase, .decrease{
+    color: var(--purple);
+    cursor: pointer;
+}
+
+.basket-total{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  align-items: center;
+  width: inherit;
+}
