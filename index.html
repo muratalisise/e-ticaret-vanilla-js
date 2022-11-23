@@ -21,7 +21,7 @@
         <ul class="menu_icons">
           <li> <i class="bi bi-person"></i> </li>
           <li> <i class="bi bi-search"></i> </li>
-          <li class="basket_icon"> 
+          <li class="basket_icon" onclick="toggleModal();"> 
             <i class="bi bi-bag"></i> 
             <span class="basket_count">2</span>
           </li>
@@ -64,8 +64,8 @@
       </div>
 
 
-        <div class="row">
-            <div class="col-5 offset-2">
+        <div class="row book_list">
+            <div class="col-5 offset-2 my-5">
               <div class="row book_card">
                 <div class="col-6">
                     <img class="img-fluid shadow" width="258" height="400" src="assets/images/books/nutuk.jpg" alt="Nutuk">
@@ -93,7 +93,7 @@
               </div>
             </div>
           
-            <div class="col-5">
+            <div class="col-5 my-5">
               <div class="row book_card">
                 <div class="col-6">
                   <img class="img-fluid shadow" width="258" height="400" src="assets/images/books/nutuk.jpg" alt="Nutuk">
@@ -316,7 +316,7 @@
 
     <div class="bakset_modal">
       <div class="basket_items"> 
-        <i class="bi bi-x"></i>
+        <i class="bi bi-x close" onclick="toggleModal();"></i>
         <h2 class="basket-title">Your Items</h2>
         <ul class="basket_list">
           <li class="basket_item">
