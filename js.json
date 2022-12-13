@@ -9,7 +9,7 @@
     "starRate": 5,
     "reviewCount": 1938,
     "stock": 1881,
-    "imgSource": "./assets/images/books/nutuk.jpg",
+    "imgSource": "./images/books/nutuk.jpg",
     "type": "HISTORY"
   },
   {
@@ -22,7 +22,7 @@
     "starRate": 4.7,
     "reviewCount": 330,
     "stock": 7,
-    "imgSource": "./assets/images/books/hayvan-ciftligi.jpg",
+    "imgSource": "./images/books/hayvan-ciftligi.jpg",
     "type": "NOVEL"
   },
   {
@@ -35,7 +35,7 @@
     "starRate": 4.2,
     "reviewCount": 130,
     "stock": 3,
-    "imgSource": "./assets/images/books/zengin-baba-yoksul-baba.jpg",
+    "imgSource": "./images/books/zengin-baba-yoksul-baba.jpg",
     "type": "FINANCE"
   },
   {
@@ -48,7 +48,7 @@
     "starRate": 4.2,
     "reviewCount": 560,
     "stock": 6,
-    "imgSource": "./assets/images/books/alayci-kus.jpg",
+    "imgSource": "./images/books/alayci-kus.jpg",
     "type": "NOVEL"
   },
   {
@@ -61,7 +61,7 @@
     "starRate": 3.7,
     "reviewCount": 410,
     "stock": 450,
-    "imgSource": "./assets/images/books/hep-hayir-diyen-cocuk.jpg",
+    "imgSource": "./images/books/hep-hayir-diyen-cocuk.jpg",
     "type": "CHILDREN"
   },
   {
@@ -74,7 +74,7 @@
     "starRate": 4.3,
     "reviewCount": 145,
     "stock": 321,
-    "imgSource": "./assets/images/books/avucunuzdaki-kelebek.jpg",
+    "imgSource": "./images/books/avucunuzdaki-kelebek.jpg",
     "type": "SELFIMPROVEMENT"
   },
   {
@@ -87,7 +87,7 @@
     "starRate": 4.3,
     "reviewCount": 173,
     "stock": 73,
-    "imgSource": "./assets/images/books/kumarbaz.jpg",
+    "imgSource": "./images/books/kumarbaz.jpg",
     "type": "NOVEL"
   },
 
@@ -101,7 +101,7 @@
     "starRate": 4.3,
     "reviewCount": 189,
     "stock": 89,
-    "imgSource": "./assets/images/books/utangac-ayi-monti.jpg",
+    "imgSource": "./images/books/utangac-ayi-monti.jpg",
     "type": "CHILDREN"
   },
   {
@@ -114,7 +114,7 @@
     "starRate": 4.3,
     "reviewCount": 78,
     "stock": 80,
-    "imgSource": "./assets/images/books/kara-delikler.jpg",
+    "imgSource": "./images/books/kara-delikler.jpg",
     "type": "SCIENCE"
   },
   {
@@ -127,7 +127,7 @@
     "starRate": 4.5,
     "reviewCount": 250,
     "stock": 14,
-    "imgSource": "./assets/images/books/insan-gelecegini-nasil-kurar.jpg",
+    "imgSource": "./images/books/insan-gelecegini-nasil-kurar.jpg",
     "type": "SELFIMPROVEMENT"
   },
   {
@@ -140,7 +140,7 @@
     "starRate": 4.2,
     "reviewCount": 480,
     "stock": 490,
-    "imgSource": "./assets/images/books/sapiens.jpg",
+    "imgSource": "./images/books/sapiens.jpg",
     "type": "HISTORY"
   },
   {
@@ -153,7 +153,7 @@
     "starRate": 4.4,
     "reviewCount": 930,
     "stock": 143,
-    "imgSource": "./assets/images/books/savas-ve-baris.jpg",
+    "imgSource": "./images/books/savas-ve-baris.jpg",
     "type": "NOVEL"
   }
 ]
