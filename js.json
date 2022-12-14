@@ -1,5 +1,4 @@
-[
-  {
+ {
     "id": 1,
     "name": "Nutuk",
     "author": "Mustafa Kemal Atatürk",
@@ -156,4 +155,3 @@
     "imgSource": "./images/books/savas-ve-baris.jpg",
     "type": "NOVEL"
   }
-]
