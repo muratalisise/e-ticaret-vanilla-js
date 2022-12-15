@@ -138,7 +138,16 @@ body{
   display: flex;
   align-content: center;
 }
-
+.image{
+  display: flex;
+  justify-content: center;
+}
+.information{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
+}
 .fos{
   font-family: open sans-serif
 }
@@ -153,16 +162,18 @@ body{
   font-weight: bold;
 }
 
-.book_star_rate .bi-star, .bi_star_fill{
+.book_star_rate .fa-star, .fa-star{
   color: white ;
   font-size: 1.2rem;
   margin-right: 5px;
 }
 
-.book_star_rate .bi_star_fill.active{
-  color: yellow;
+.book_star_rate .fa-star.active{
+  color: rgb(238, 222, 0);
 }
-
+.btn{
+  width: 100%;
+}
 .book_reviews{
   color: gray;
 }
@@ -176,6 +187,7 @@ body{
   -webkit-line-clamp: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
 }
 
 .filter-background{
@@ -206,7 +218,9 @@ body{
   cursor: pointer;
   font-weight: bold;
 }
-
+.img-fluid{
+  height: 400px;
+}
 .filter li:hover{
   transition: 1s all linear;
   color: var(--purple);

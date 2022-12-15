@@ -9,7 +9,7 @@ let bookList = [ {
     "starRate": 5,
     "reviewCount": 1938,
     "stock": 1881,
-    "imgSource": "./images/books/nutuk.jpg",
+    "imgSource": "images/books/nutuk.jpg",
     "type": "HISTORY"
   },
   {
@@ -156,68 +156,107 @@ let bookList = [ {
     "imgSource": "./images/books/savas-ve-baris.jpg",
     "type": "NOVEL"
   }];
-//const axios = require('axios');
-const toggleModal = () => {
-    const basketModelEl = document.querySelector(".bakset_modal");
-    basketModelEl.classList.toggle("active");
-}
 
 
-console.log(bookList);
-
-        
-
-        /*fetch("./js.json")
-        .then((response) => console.log(response)) 
-        .then((books) => (bookList = books));
-     */
-
-    // const createBookStars = (starRate) => {
-    //     let starRateHtml = "";
-    //     for (let i = 1; i <= 5; i++) {
-    //             if (Math.round(starRate) >= i) 
-    //             starRateHtml += ` <i class="bi bi-star-fill active"></i> ` ;
-    //             else starRateHtml += `<i class="bi bi-star-fill"></i>`;
-    //     }
-    //     return starRateHtml;
-    // };
-
-    // const createBookItemHtml = () => {
-    //   const bookListEl = document.querySelector(".book_list");
-    //   let bookListHtml = "";
-    //   bookList.forEach((book, index) => {
-    //       bookListHtml += 
-    //       `
-    //           <div class="col-5 ${index % 2 == 0 && "offset-2"} my-5">
-    //             <div class="row book_card">
-    //               <div class="col-6">
-    //                   <img class="img-fluid shadow" width="258" height="400" src="${book.imgSource}">
-    //               </div>
-    //               <div class="col-6">
-    //                   <div class="book-detail">
-    //                       <span class="fos gray fs-5">${book.author}</span> <br />
-    //                       <span class="fs-4 fw-bold">${book.name}</span> <br />
-    //                       <span class="book_star_rate"> 
-    //                           ${createBookStars(book.starRate)}
-    //                         <span class="gray">${book.reviewCount}</span>
-    //                       </span>
-    //                   </div>
-    //                 <p class="book-description fos gray">
-    //                       ${book.description}
-    //                 </p>
-    //                   <div>
-    //                     <span class="black fw-bold fs-4 me-2"> ${book.price} TL</span>
-    //                     ${book.oldPrice && `<span class="fs-4 fw-bold old_price"> ${book.oldPrice} TL</span>` }
-    //                   </div>
-    //                   <button class="btn btn-outline-success">Sepete Ekle</button>
-    //               </div>
-    //             </div>
-    //           </div>
-    //       `
-    //       ; 
-    //   });
-    //   bookListEl.innerHTML += bookListHtml;
-    // };
 
 
-    //     createBookItemHtml();
+
+    const toggleModal = () => {
+      const basketModalEl = document.querySelector(".bakset_modal");
+      basketModalEl.classList.toggle("active");
+    };
+
+    const createBookStars = (starRate) => {
+        let starRateHtml = "";
+        for (let i = 1; i <= 5; i++) {
+                if (Math.round(starRate) >= i) 
+                starRateHtml += ` <i class="fa-solid fa-star active"></i> ` ;
+                else starRateHtml += ` <i class="fa-solid fa-star"></i> `;
+        }
+        return starRateHtml;
+    };
+
+    const createBookItemHtml = () => {
+      const bookListEl = document.querySelector(".book_list");
+      let bookListHtml = "";
+      bookList.forEach((book, index) => {
+          bookListHtml += 
+          `
+              <div class="col-5 ${index % 2 == 0 && "offset-2"} my-5">
+                <div class="row book_card">
+                  <div class="col-6 image">
+                      <img class="img-fluid shadow" width="258" height="400" src="${book.imgSource}"> 
+                  </div>
+                  <div class="col-6 information">
+                      <div class="book-detail">
+                          <span class="fos gray fs-5">${book.author}</span> <br />
+                          <span class="fs-4 fw-bold">${book.name}</span> <br />
+                          <span class="book_star_rate"> 
+                              ${createBookStars(book.starRate)}
+                            <span class="gray">${book.reviewCount}</span>
+                          </span>
+                      </div>
+                    <p class="book-description fos gray">
+                          ${book.description}
+                    </p>
+                      <div>
+                        <span class="black fw-bold fs-4 me-2"> ${book.price} TL</span>
+                        ${
+                          book.oldPrice 
+                          ? `<span class="fs-4 fw-bold old_price"> ${book.oldPrice} TL</span>` 
+                          :""
+                        }
+                      </div>
+                      <button class="btn btn-outline-success">Sepete Ekle</button>
+                  </div>
+                </div>
+              </div>
+          `
+          ; 
+      });
+      bookListEl.innerHTML += bookListHtml;
+    };
+    createBookItemHtml();
+
+
+
+    const BOOK_TYPES = {
+      ALL: "Tümü",
+      NOVEL: "Roman",
+      CHILDREN:"Çocuk",
+      SELFIMPROVEMENT: "Kişisel Gelişim",
+      HISTORY: "Tarih",
+      FINANCE: "Finans",
+      SCIENCE: "Bilim",
+    }
+
+
+
+    const createBookTypesHtml = () => {
+      const filterEl = document.querySelector(".filter");
+      let filterHtml = ""; 
+      var filterTypes=["ALL"];
+      bookList.forEach(book => {
+        if(filterTypes.findIndex((filter) => filter == book.type) == -1)filterTypes.push(book.type); 
+      });
+
+      filterTypes.forEach((type, index) => {
+        filterHtml += '<a class="menu-link" href="#" onclick = "filterBook(this)" data-type"${type}"> ${BOOK_TYPES[type] ||  } </a>';
+      });
+      filterEl.innerHTML += filterHtml;
+    };
+
+
+    const filterBooks= (filterEl) => {
+      let bookType = filterEl.dataset.type;
+      if (bookType == "ALL")getbooks();
+      else bookList = bookList.filter((book) => book.type == bookType);
+    }
+
+
+
+
+    setTimeout(() => {
+      createBookItemHtml();
+      createBookTypesHtml();
+    }, 100);
