@@ -156,9 +156,13 @@ let bookList = [ {
     "imgSource": "./images/books/savas-ve-baris.jpg",
     "type": "NOVEL"
   }];
-
-
-
+  
+  /* Önce loop ile kitapları yazdır onu filtreleme bölümüüne fonksiyon olarak çağır */
+  
+    for (let i = 0; i < bookList.length; i++) {
+        console.log(bookList[i]);  
+      }
+    
 
 
     const toggleModal = () => {
@@ -241,7 +245,7 @@ let bookList = [ {
       });
 
       filterTypes.forEach((type, index) => {
-        filterHtml += '<a class="menu-link" href="#" onclick = "filterBook(this)" data-type"${type}"> ${BOOK_TYPES[type] ||  } </a>';
+        filterHtml += `<li class="menu-item" onclick="filterBooks(this)" data-type="${type}"> <a class="menu-link" href="#">${BOOK_TYPES[type] || type}</a> <i class="fa-solid fa-arrow-left-long"></i> </li>`;
       });
       filterEl.innerHTML += filterHtml;
     };
@@ -249,8 +253,11 @@ let bookList = [ {
 
     const filterBooks= (filterEl) => {
       let bookType = filterEl.dataset.type;
-      if (bookType == "ALL")getbooks();
-      else bookList = bookList.filter((book) => book.type == bookType);
+      console.log("calıstı");
+        /* fonksiyon buraya çağrılacak */
+      if (bookType != "ALL")
+       bookList = bookList.filter((book) => book.type == bookType);
+      createBookItemHtml();
     }
 
 
@@ -260,3 +267,4 @@ let bookList = [ {
       createBookItemHtml();
       createBookTypesHtml();
     }, 100);
+

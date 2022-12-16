@@ -11,18 +11,19 @@ body{
 .menu-bar{
   width: 100%;
   max-width: 520px;
-  height: auto;
+  height: 100%;
   background-color: rgba(73, 66, 99, 0.356);
   position: absolute;
   left: 0;
   top: 0;
-  padding: 400px 20px;
 }
 .menu-item{
     font-weight: 600;
     font-size: 35px;
     padding: 50px;
     list-style: none;
+    text-decoration: none;
+    color: white;
 }
 .menu-link{
   text-decoration: none;
