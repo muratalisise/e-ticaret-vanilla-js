@@ -1,4 +1,5 @@
 
+let basketList = [];
 let bookList = [ {
     "id": 1,
     "name": "Nutuk",
@@ -156,15 +157,37 @@ let bookList = [ {
     "imgSource": "./images/books/savas-ve-baris.jpg",
     "type": "NOVEL"
   }];
-  
-  /* Önce loop ile kitapları yazdır onu filtreleme bölümüüne fonksiyon olarak çağır */
-  
-    for (let i = 0; i < bookList.length; i++) {
-        console.log(bookList[i]);  
-      }
-    
 
 
+
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-bottom-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+  
+  
+
+    const bookNumber = () => {
+     for (let i = 0; i < bookList.length; i++) {
+      console.log(bookList[i]);
+     }
+    };
+    bookNumber();
+   
+  
     const toggleModal = () => {
       const basketModalEl = document.querySelector(".bakset_modal");
       basketModalEl.classList.toggle("active");
@@ -211,7 +234,7 @@ let bookList = [ {
                           :""
                         }
                       </div>
-                      <button class="btn btn-outline-success">Sepete Ekle</button>
+                      <button class="btn btn-outline-success" onclick="addBookToBasket(${book.id})">Sepete Ekle</button>
                   </div>
                 </div>
               </div>
@@ -222,8 +245,6 @@ let bookList = [ {
     };
     createBookItemHtml();
 
-
-
     const BOOK_TYPES = {
       ALL: "Tümü",
       NOVEL: "Roman",
@@ -233,9 +254,6 @@ let bookList = [ {
       FINANCE: "Finans",
       SCIENCE: "Bilim",
     }
-
-
-
     const createBookTypesHtml = () => {
       const filterEl = document.querySelector(".filter");
       let filterHtml = ""; 
@@ -243,23 +261,119 @@ let bookList = [ {
       bookList.forEach(book => {
         if(filterTypes.findIndex((filter) => filter == book.type) == -1)filterTypes.push(book.type); 
       });
-
       filterTypes.forEach((type, index) => {
-        filterHtml += `<li class="menu-item" onclick="filterBooks(this)" data-type="${type}"> <a class="menu-link" href="#">${BOOK_TYPES[type] || type}</a> <i class="fa-solid fa-arrow-left-long"></i> </li>`;
+        filterHtml += `<li class="menu-item" onclick="filterBooks(this)" data-type="${type}"> ${BOOK_TYPES[type] || type}<i class="fa-solid fa-arrow-left-long"></i> </li>`;
       });
       filterEl.innerHTML += filterHtml;
     };
-
-
     const filterBooks= (filterEl) => {
-      let bookType = filterEl.dataset.type;
-      console.log("calıstı");
-        /* fonksiyon buraya çağrılacak */
-      if (bookType != "ALL")
+      let bookType = filterEl.dataset.type;      
+        bookNumber();
+        if (bookType != "ALL")
        bookList = bookList.filter((book) => book.type == bookType);
       createBookItemHtml();
     }
 
+    const listBasketItems = () => {
+      localStorage.setItem("basketList", JSON.stringify(basketList));
+      const basketListEl = document.querySelector(".basket_list");
+      document.querySelector(".basket_count").innerHTML = basketList.length > 0 ? basketList.length : null;
+      const total_priceEl = document.querySelector(".total_price");
+
+      let basketListHtml="";
+      let total_price = 0 ;
+      basketList.forEach(item => {
+        total_price += item.product.price * item.quantity;
+        basketListHtml += `
+        <li class="basket_item">
+            <img src="${item.product.imgSource}" width="100" height="100" alt="nutuk">
+            <div class="basket_item-info">
+                <h3 class="book_name">${item.product.name}</h3>
+                <span class="book_price">${item.product.price}TL</span>
+                <span onclick="removeItemToBasket(${item.product.id})">remove</span>
+            </div>
+            <div class="book-count">
+                <span class="decrease" onclick="decreaseItemToBasket(${item.product.id})">-</span>
+                <span class="my-5">${item.quantity}</span>
+                <span class="increase" onclick="increaseItemToBasket(${item.product.id})">+</span>
+            </div>
+        </li>
+        `;
+      })
+      basketListEl.innerHTML = basketListHtml ? basketListHtml : `
+           <li class="basket_item" style="justify-content: center;">
+                Sepetinize ürün ekleyiniz.
+            </li>
+    
+      `;
+      total_priceEl.innerHTML = total_price > 0 ? "Total :" + total_price.toFixed(2) + "TL" : null;
+    }
+  const addBookToBasket = (bookId) => {
+    let findedBook = bookList.find((book) => book.id == bookId);
+      if (findedBook) {
+        const basketAlreadyIndex = basketList.findIndex(
+          (basket) => basket.product.id == bookId
+        );
+
+          if (basketAlreadyIndex == -1) {
+            let addedItem = {quantity: 1, product: findedBook};
+            basketList.push(addedItem);
+          }else{
+            if 
+            (
+              basketList[basketAlreadyIndex].quantity < basketList[basketAlreadyIndex].product.stock
+            )
+            basketList[basketAlreadyIndex].quantity += 1;
+            else toastr.error("Yeterli stok bulunmamaktadır.")
+            return;  
+          }
+          listBasketItems();
+          toastr.success("Kitap başarılı bir şekilde sepete eklendi.");
+      }
+      console.log(bookId);
+  };
+
+
+  const removeItemToBasket = (bookId) => {
+    const findedIndex = basketList.findIndex(
+      (basket) => basket.product.id == bookId
+    );
+    if (findedIndex != -1) {
+        basketList.splice(findedIndex, 1);
+    }
+    listBasketItems();
+  }
+ 
+  const decreaseItemToBasket = (bookId) => {
+     const findedIndex = basketList.findIndex(
+      (basket) => basket.product.id == bookId
+    );
+    if (findedIndex != -1) {
+      if (basketList[findedIndex].quantity != 1) {
+        basketList[findedIndex].quantity -= 1;
+      } else removeItemToBasket(bookId);
+      listBasketItems();
+    }
+  }
+
+   const increaseItemToBasket = (bookId) => {
+     const findedIndex = basketList.findIndex(
+      (basket) => basket.product.id == bookId
+    );
+    if (findedIndex != -1) {
+      if (basketList[findedIndex].quantity < basketList[findedIndex].product.stock) {
+      } 
+      else toastr.error("Yeterli stok bulunmamaktadır.")
+      basketList[findedIndex].quantity += 1;
+      listBasketItems();
+    }
+  }
+
+
+    if (localStorage.getItem("basketList")) {
+    basketList = JSON.parse(localStorage.getItem("basketList"));
+    listBasketItems();
+  }
 
 
 

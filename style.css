@@ -24,10 +24,8 @@ body{
     list-style: none;
     text-decoration: none;
     color: white;
-}
-.menu-link{
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
 .menu-link:hover{
   transition: 0.5s all linear;
@@ -118,7 +116,9 @@ body{
   font-size: 1rem;
   font-weight: bold;
 }
-
+.basket_count:empty{
+  display: none;
+}
 .slider{
   width: 80%;
   height: 600px;
@@ -293,7 +293,7 @@ body{
   padding: 0 5px;
   margin-top: 3rem;
   max-height: 650px;
-  overflow-y: auto;
+  overflow: auto;
 }
 
 .basket_item{
@@ -354,4 +354,8 @@ body{
 }
 .fa-x:active{
   color: red;
+}
+
+.total_price:empty + .btn_danger{
+    display: none;
 }

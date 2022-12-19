@@ -11,7 +11,8 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./toastr/toastr.min.css">
+        <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     
@@ -52,7 +53,7 @@
                 <li> <i class="fa-solid fa-magnifying-glass"></i> </li>
                 <li class="basket_icon" onclick="toggleModal();">
                 <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="basket_count">2</span>
+                    <span class="basket_count"></span>
                 </li>
             </ul>
         </div>
@@ -78,74 +79,35 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+
+
     <div class="row book_list">
         <div class="menu-bar">
             <ul class="filter">
-                <li class="menu-item"> <a class="menu-link" href="#">Tümü</a> <i class="fa-solid fa-arrow-left-long"></i> </li>
-                <li class="menu-item"> <a class="menu-link" href="#">Kişisel Gelişim</a> <i class="fa-solid fa-arrow-left-long"></i> </li>
-                <li class="menu-item"> <a class="menu-link" href="#">Roman</a> <i class="fa-solid fa-arrow-left-long"></i></li>
-                <li class="menu-item"> <a class="menu-link" href="#">Finans</a> <i class="fa-solid fa-arrow-left-long"></i></li>
-                <li class="menu-item"> <a class="menu-link" href="#">Çocuk</a> <i class="fa-solid fa-arrow-left-long"></i></li>
-                <li class="menu-item"> <a class="menu-link" href="#">Bilim</a> <i class="fa-solid fa-arrow-left-long"></i></li>
-                <li class="menu-item"> <a class="menu-link" href="#">Tarih</a> <i class="fa-solid fa-arrow-left-long"></i></li>
+              
             </ul>
         </div>
         <div class="box">
     
     
         </div>
-    
     </div>
+
+    
     <div class="bakset_modal">
         <div class="basket_items">
             <i class="fa-solid fa-x" onclick="toggleModal();"></i>
             <h2 class="basket-title">Your Items</h2>
             <ul class="basket_list">
-                <li class="basket_item">
-                    <img src="./images/books/nutuk.jpg" width="100" height="100" alt="nutuk">
-                    <div class="basket_item-info">
-                        <h3 class="book_name">Nutuk</h3>
-                        <span class="book_price">45 TL</span>
-                        <span>remove</span>
-                    </div>
-                    <div class="book-count">
-                        <span class="decrease">-</span>
-                        <span class="my-5">2</span>
-                        <span class="increase">+</span>
-                    </div>
+                <li class="basket_item" style="justify-content: center;">
+                   Sepetinize ürün ekleyiniz.
                 </li>
     
-                <li class="basket_item">
-                    <img src="./images/books/nutuk.jpg" width="100" height="100" alt="nutuk">
-                    <div class="basket_item-info">
-                        <h3 class="book_name">Nutuk</h3>
-                        <span class="book_price">45 TL</span>
-                        <span>remove</span>
-                    </div>
-                    <div class="book-count">
-                        <span class="decrease">-</span>
-                        <span class="my-5">2</span>
-                        <span class="increase">+</span>
-                    </div>
-                </li>
-    
-                <li class="basket_item">
-                    <img src="./images/books/nutuk.jpg" width="100" height="100" alt="nutuk">
-                    <div class="basket_item-info">
-                        <h3 class="book_name">Nutuk</h3>
-                        <span class="book_price">45 TL</span>
-                        <span>remove</span>
-                    </div>
-                    <div class="book-count">
-                        <span class="decrease">-</span>
-                        <span class="my-5">2</span>
-                        <span class="increase">+</span>
-                    </div>
-                </li>
+           
             </ul>
             <div class="basket-total">
-                <span class="fw-bold mb-3 fs-4"> Total : 145 TL</span>
-                <button class="btn btn-lg m-5 btn-outline-danger">Check Out</button>
+                <span class="fw-bold mb-3 fs-4 total_price"></span>
+                <button class="btn btn-lg m-5 btn-outline-danger btn_danger">Check Out</button>
             </div>
         </div>
     </div>
@@ -159,6 +121,7 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./toastr/toastr.min.js"></script>
     <script src="script.js" type="text/javascript"></script>
 </body>
 </html>
