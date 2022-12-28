@@ -10,12 +10,12 @@ body{
 }
 .menu-bar{
   width: 100%;
-  max-width: 520px;
+  max-width: 330px;
   height: 100%;
-  background-color: rgba(73, 66, 99, 0.356);
   position: absolute;
   left: 0;
   top: 0;
+  background-color: rgba(253, 241, 241, 0.644);
 }
 .menu-item{
     font-weight: 600;
@@ -26,7 +26,12 @@ body{
     color: white;
     text-decoration: none;
     color: white;
+    text-decoration: none;
 }
+.menu-item:active{
+   font-size: 30px;
+}
+
 .menu-link:hover{
   transition: 0.5s all linear;
   color: #5c6a797c;
@@ -59,9 +64,15 @@ body{
   max-width: 300px;
 }
 .navbar{
-  height: 120px;
-  width: 80%;
-  margin-left: 10%;
+  background-color: rgba(255, 0, 0, 0.555);
+}
+.navbar-collapse{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+.nav-item{
+  padding: 0 90px;
 }
 .title{
   font-weight: bold;
@@ -196,7 +207,6 @@ body{
   left: 0;
   width: 600px;
   height: 900px;
-  background-color: rgb(177, 168, 168);
   z-index: -1;
 }
 
@@ -241,7 +251,7 @@ body{
   border-radius: 50%;
   background-color: var(--purple);
   position: absolute;
-    left: 158px;
+  left: 50px;
   margin-top: 12px;
 }
 
@@ -271,6 +281,7 @@ body{
 
 .bakset_modal.active .basket_items{
   width: 450px;
+
 }
 
 .basket_items .bi-x{
@@ -294,6 +305,9 @@ body{
   margin-top: 3rem;
   max-height: 650px;
   overflow: auto;
+}
+.basket_list li{
+ text-decoration: none;
 }
 
 .basket_item{

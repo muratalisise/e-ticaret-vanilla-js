@@ -158,8 +158,6 @@ let bookList = [ {
     "type": "NOVEL"
   }];
 
-
-
 toastr.options = {
   "closeButton": false,
   "debug": false,
@@ -177,144 +175,134 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
-  
-  
 
-    const bookNumber = () => {
-     for (let i = 0; i < bookList.length; i++) {
-      console.log(bookList[i]);
-     }
-    };
-    bookNumber();
-   
-  
-    const toggleModal = () => {
-      const basketModalEl = document.querySelector(".bakset_modal");
-      basketModalEl.classList.toggle("active");
-    };
-
-    const createBookStars = (starRate) => {
-        let starRateHtml = "";
-        for (let i = 1; i <= 5; i++) {
-                if (Math.round(starRate) >= i) 
-                starRateHtml += ` <i class="fa-solid fa-star active"></i> ` ;
-                else starRateHtml += ` <i class="fa-solid fa-star"></i> `;
-        }
-        return starRateHtml;
-    };
-
-    const createBookItemHtml = () => {
-      const bookListEl = document.querySelector(".book_list");
-      let bookListHtml = "";
-      bookList.forEach((book, index) => {
-          bookListHtml += 
-          `
-              <div class="col-5 ${index % 2 == 0 && "offset-2"} my-5">
-                <div class="row book_card">
-                  <div class="col-6 image">
-                      <img class="img-fluid shadow" width="258" height="400" src="${book.imgSource}"> 
-                  </div>
-                  <div class="col-6 information">
-                      <div class="book-detail">
-                          <span class="fos gray fs-5">${book.author}</span> <br />
-                          <span class="fs-4 fw-bold">${book.name}</span> <br />
-                          <span class="book_star_rate"> 
-                              ${createBookStars(book.starRate)}
-                            <span class="gray">${book.reviewCount}</span>
-                          </span>
-                      </div>
-                    <p class="book-description fos gray">
-                          ${book.description}
-                    </p>
-                      <div>
-                        <span class="black fw-bold fs-4 me-2"> ${book.price} TL</span>
-                        ${
-                          book.oldPrice 
-                          ? `<span class="fs-4 fw-bold old_price"> ${book.oldPrice} TL</span>` 
-                          :""
-                        }
-                      </div>
-                      <button class="btn btn-outline-success" onclick="addBookToBasket(${book.id})">Sepete Ekle</button>
-                  </div>
+  const bookNumber = () => {
+    for (let i = 0; i < bookList.length; i++) {
+    console.log(bookList[i]);
+    }
+  };
+  bookNumber();
+  const toggleModal = () => {
+    const basketModalEl = document.querySelector(".bakset_modal");
+    basketModalEl.classList.toggle("active");
+  };
+  const createBookStars = (starRate) => {
+      let starRateHtml = "";
+      for (let i = 1; i <= 5; i++) {
+              if (Math.round(starRate) >= i) 
+              starRateHtml += ` <i class="fa-solid fa-star active"></i> ` ;
+              else starRateHtml += ` <i class="fa-solid fa-star"></i> `;
+      }
+      return starRateHtml;
+  };
+  const createBookItemHtml = () => {
+    const bookListEl = document.querySelector(".book_list");
+    let bookListHtml = "";
+    bookList.forEach((book, index) => {
+        bookListHtml += 
+        `
+            <div class="col-5 ${index % 2 == 0 && "offset-2"} my-5">
+              <div class="row book_card">
+                <div class="col-6 image">
+                    <img class="img-fluid shadow" width="258" height="400" src="${book.imgSource}"> 
+                </div>
+                <div class="col-6 information">
+                    <div class="book-detail">
+                        <span class="fos gray fs-5">${book.author}</span> <br />
+                        <span class="fs-4 fw-bold">${book.name}</span> <br />
+                        <span class="book_star_rate"> 
+                            ${createBookStars(book.starRate)}
+                          <span class="gray">${book.reviewCount}</span>
+                        </span>
+                    </div>
+                  <p class="book-description fos gray">
+                        ${book.description}
+                  </p>
+                    <div>
+                      <span class="black fw-bold fs-4 me-2"> ${book.price} TL</span>
+                      ${
+                        book.oldPrice 
+                        ? `<span class="fs-4 fw-bold old_price"> ${book.oldPrice} TL</span>` 
+                        :""
+                      }
+                    </div>
+                    <button class="btn btn-outline-success" onclick="addBookToBasket(${book.id})">Sepete Ekle</button>
                 </div>
               </div>
-          `
-          ; 
-      });
-      bookListEl.innerHTML += bookListHtml;
-    };
+            </div>
+        `; 
+    });
+    bookListEl.innerHTML += bookListHtml;
+  };
+  createBookItemHtml();
+  const BOOK_TYPES = {
+    ALL: "Tümü",
+    NOVEL: "Roman",
+    CHILDREN:"Çocuk",
+    SELFIMPROVEMENT: "Kişisel Gelişim",
+    HISTORY: "Tarih",
+    FINANCE: "Finans",
+    SCIENCE: "Bilim",
+  }
+  const createBookTypesHtml = () => {
+    const filterEl = document.querySelector(".filter");
+    let filterHtml = ""; 
+    var filterTypes=["ALL"];
+    bookList.forEach(book => {
+      if(filterTypes.findIndex((filter) => filter == book.type) == -1)filterTypes.push(book.type); 
+    });
+    filterTypes.forEach((type, index) => {
+      filterHtml += `<li class="menu-item active" onclick="filterBooks(this)" data-type="${type}"> ${BOOK_TYPES[type] || type}</li>`;
+    });
+    filterEl.innerHTML += filterHtml;
+  };
+  const filterBooks= (filterEl) => {
+    let bookType = filterEl.dataset.type;      
+    bookNumber();
+    if (bookType != "ALL")
+    bookList = bookList.filter((book) => book.type == bookType);
     createBookItemHtml();
+  }
+  const listBasketItems = () => {
+    localStorage.setItem("basketList", JSON.stringify(basketList));
+    const basketListEl = document.querySelector(".basket_list");
+    document.querySelector(".basket_count").innerHTML = basketList.length > 0 ? basketList.length : null;
+    const total_priceEl = document.querySelector(".total_price");
 
-    const BOOK_TYPES = {
-      ALL: "Tümü",
-      NOVEL: "Roman",
-      CHILDREN:"Çocuk",
-      SELFIMPROVEMENT: "Kişisel Gelişim",
-      HISTORY: "Tarih",
-      FINANCE: "Finans",
-      SCIENCE: "Bilim",
-    }
-    const createBookTypesHtml = () => {
-      const filterEl = document.querySelector(".filter");
-      let filterHtml = ""; 
-      var filterTypes=["ALL"];
-      bookList.forEach(book => {
-        if(filterTypes.findIndex((filter) => filter == book.type) == -1)filterTypes.push(book.type); 
-      });
-      filterTypes.forEach((type, index) => {
-        filterHtml += `<li class="menu-item" onclick="filterBooks(this)" data-type="${type}"> ${BOOK_TYPES[type] || type}<i class="fa-solid fa-arrow-left-long"></i> </li>`;
-      });
-      filterEl.innerHTML += filterHtml;
-    };
-    const filterBooks= (filterEl) => {
-      let bookType = filterEl.dataset.type;      
-        bookNumber();
-        if (bookType != "ALL")
-       bookList = bookList.filter((book) => book.type == bookType);
-      createBookItemHtml();
-    }
-
-    const listBasketItems = () => {
-      localStorage.setItem("basketList", JSON.stringify(basketList));
-      const basketListEl = document.querySelector(".basket_list");
-      document.querySelector(".basket_count").innerHTML = basketList.length > 0 ? basketList.length : null;
-      const total_priceEl = document.querySelector(".total_price");
-
-      let basketListHtml="";
-      let total_price = 0 ;
-      basketList.forEach(item => {
-        total_price += item.product.price * item.quantity;
-        basketListHtml += `
-        <li class="basket_item">
-            <img src="${item.product.imgSource}" width="100" height="100" alt="nutuk">
-            <div class="basket_item-info">
-                <h3 class="book_name">${item.product.name}</h3>
-                <span class="book_price">${item.product.price}TL</span>
-                <span onclick="removeItemToBasket(${item.product.id})">remove</span>
-            </div>
-            <div class="book-count">
-                <span class="decrease" onclick="decreaseItemToBasket(${item.product.id})">-</span>
-                <span class="my-5">${item.quantity}</span>
-                <span class="increase" onclick="increaseItemToBasket(${item.product.id})">+</span>
-            </div>
-        </li>
-        `;
-      })
-      basketListEl.innerHTML = basketListHtml ? basketListHtml : `
-           <li class="basket_item" style="justify-content: center;">
-                Sepetinize ürün ekleyiniz.
-            </li>
-    
+    let basketListHtml="";
+    let total_price = 0 ;
+    basketList.forEach(item => {
+      total_price += item.product.price * item.quantity;
+      basketListHtml += `
+      <li class="basket_item">
+          <img src="${item.product.imgSource}" width="100" height="100" alt="nutuk">
+          <div class="basket_item-info">
+              <h3 class="book_name">${item.product.name}</h3>
+              <span class="book_price">${item.product.price}TL</span>
+              <span onclick="removeItemToBasket(${item.product.id})">remove</span>
+          </div>
+          <div class="book-count">
+              <span class="decrease" onclick="decreaseItemToBasket(${item.product.id})">-</span>
+              <span class="my-5">${item.quantity}</span>
+              <span class="increase" onclick="increaseItemToBasket(${item.product.id})">+</span>
+          </div>
+      </li>
       `;
-      total_priceEl.innerHTML = total_price > 0 ? "Total :" + total_price.toFixed(2) + "TL" : null;
-    }
+    })
+    basketListEl.innerHTML = basketListHtml ? basketListHtml : `
+          <li class="basket_item" style="justify-content: center;">
+              Sepetinize ürün ekleyiniz.
+          </li>
+  
+    `;
+    total_priceEl.innerHTML = total_price > 0 ? "Total :" + total_price.toFixed(2) + "TL" : null;
+  }
   const addBookToBasket = (bookId) => {
     let findedBook = bookList.find((book) => book.id == bookId);
       if (findedBook) {
         const basketAlreadyIndex = basketList.findIndex(
           (basket) => basket.product.id == bookId
         );
-
           if (basketAlreadyIndex == -1) {
             let addedItem = {quantity: 1, product: findedBook};
             basketList.push(addedItem);
@@ -332,8 +320,6 @@ toastr.options = {
       }
       console.log(bookId);
   };
-
-
   const removeItemToBasket = (bookId) => {
     const findedIndex = basketList.findIndex(
       (basket) => basket.product.id == bookId
@@ -343,7 +329,6 @@ toastr.options = {
     }
     listBasketItems();
   }
- 
   const decreaseItemToBasket = (bookId) => {
      const findedIndex = basketList.findIndex(
       (basket) => basket.product.id == bookId
@@ -355,7 +340,6 @@ toastr.options = {
       listBasketItems();
     }
   }
-
    const increaseItemToBasket = (bookId) => {
      const findedIndex = basketList.findIndex(
       (basket) => basket.product.id == bookId
@@ -368,17 +352,12 @@ toastr.options = {
       listBasketItems();
     }
   }
-
-
     if (localStorage.getItem("basketList")) {
     basketList = JSON.parse(localStorage.getItem("basketList"));
     listBasketItems();
   }
 
-
-
-    setTimeout(() => {
-      createBookItemHtml();
-      createBookTypesHtml();
-    }, 100);
+  setTimeout(() => {
+    createBookTypesHtml();
+  }, 100);
 
